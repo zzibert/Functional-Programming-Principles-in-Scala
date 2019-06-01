@@ -3,21 +3,15 @@ object ScalaTutorial {
         
     }
 
-    def abs(x: Double) = if (x >= 0) x else -x
+    def factorial(x: Int): Int =
+      if (x == 0) 1 else x * factorial(x - 1)
 
-    def sqrt(x: Double): Double = {
-      def sqrtIter(guess: Double): Double =
-        if (isGoodEnough(guess)) guess
-        else sqrtIter(improve(guess))
-      
-      def isGoodEnough(guess: Double) = 
-        abs((guess * guess) - x) < 0.001
-
-      def improve(guess: Double) =
-        (guess + x / guess) / 2
-
-      sqrtIter(1)
+    def tailFactorial(n: Int): Int = {
+      def loop(acc: Int, n: Int): Int =
+        if (n == 0) acc
+        else loop(acc * n, n - 1)
+      loop(1, n)
     }
 
-    println(sqrt(16))
+    println(tailFactorial(5))
 }
