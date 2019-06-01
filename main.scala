@@ -1,10 +1,6 @@
 object ScalaTutorial {
     def main(args: Array[String]) {
-        var i = 0
-
-        while (i <= 10) {
-            println(i)
-            i += 1
-        }
+        
     }
+    def abs(x: Int) = if (x >= 0) x else -x
 }
