@@ -13,12 +13,32 @@ object Main {
   /**
    * Exercise 1
    */
-    def pascal(c: Int, r: Int): Int = ???
+    def pascal(c: Int, r: Int): Int = {
+      if (r == 0) 1
+      else if (c == 0 || c == r) 1
+      else pascal(c - 1, r - 1) + pascal(c , r - 1)
+    }
   
   /**
    * Exercise 2
    */
-    def balance(chars: List[Char]): Boolean = ???
+    def balance(chars: List[Char]): Boolean = {
+      def f(chars: List[Char], numOpens: Int): Boolean = {
+        if (chars.isEmpty) {
+          numOpens == 0
+        } else {
+          val h = chars.head
+          val n =
+            if (h == '(') numOpens + 1
+            else if (h == ')') numOpens - 1
+            else numOpens
+          if (n >= 0) f(chars.tail, n)
+          else false
+        }
+      }
+
+      f(chars, 0)
+    }
   
   /**
    * Exercise 3
