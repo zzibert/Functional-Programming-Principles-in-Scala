@@ -28,12 +28,12 @@ object Main {
           numOpens == 0
         } else {
           val h = chars.head
-          val n =
-            if (h == '(') numOpens + 1
+          val n = if (h == '(') numOpens + 1
             else if (h == ')') numOpens - 1
             else numOpens
           if (n >= 0) f(chars.tail, n)
           else false
+
         }
       }
 
@@ -43,5 +43,11 @@ object Main {
   /**
    * Exercise 3
    */
-    def countChange(money: Int, coins: List[Int]): Int = ???
+    def countChange(money: Int, coins: List[Int]): Int =
+      if (money < 0 || coins.isEmpty)
+        0
+      else if (money == 0)
+        1
+      else
+        countChange(money - coins.head, coins) + countChange(money, coins.tail)
   }
