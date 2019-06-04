@@ -8,7 +8,15 @@ object Main extends App {
         }
         loop(a, 0)
     }
+    def product(f: Int => Int)(a: Int, b: Int): Int = {
+      if (a > b) 1
+      else f(a) * product(f)(a + 1, b)
+    }
 
-    println(sum(x => x * x, 0, 4)) 
+    def factorial(a: Int) = product(x => x)(1, a)
+
+    println(factorial(6))
+    
+  
 }
 
