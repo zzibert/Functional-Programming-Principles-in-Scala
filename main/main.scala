@@ -1,31 +1,25 @@
 package main
 
 object Main extends App {
-    def sum(f: Int => Int, a: Int, b: Int): Int = {
-        def loop(a: Int, acc: Int): Int = {
-            if (a > b) acc
-            else loop(a + 1, acc + f(a))
-        }
-        loop(a, 0)
-    }
-    def product(f: Int => Int)(a: Int, b: Int): Int = generalized((x, y) => x * y)(1)(f)(a, b)
+  val x = new Rational(1, 3)
+  val y = new Rational(5, 7)
+  val z = new Rational(3, 2)
 
-    def factorial(a: Int) = product(x => x)(1, a)
+  println(x.sub(y).sub(z))
 
-    def generalized(f: (Int, Int) => Int)(unit: Int)(g: Int => Int)(a: Int, b: Int): Int = {
-      if (a > b) unit
-      else f(g(a), generalized(f)(unit)(g)(a + 1, b))
-    }
+}
 
-    // summation
-    println(generalized((x, y) => x + y)(0)(x => x)(1, 10))
-
-    // multiplication
-    println(generalized((x, y) => x * y)(1)(x => x)(1, 5))
-
-    //factorial defined as product defined as generalization
-    println(factorial(6))
+class Rational(x: Int, y: Int) {
+    def numer = x
+    def denom = y
+    def add(that: Rational) = 
+      new Rational(
+          numer * that.denom + that.numer * denom,
+          denom * that.denom
+      )
+    def neg = new Rational(-numer, denom)
+    def sub(that: Rational) = add(that.neg)
     
-  
+    override def toString = numer + "/" + denom
 }
 
