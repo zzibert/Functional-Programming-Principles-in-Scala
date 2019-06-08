@@ -6,8 +6,8 @@ object Main extends App {
   val z = new Rational(4, 3)
   
 
-  println(x.less(y))
-  println(x.less(z))
+  println(x < y)
+  println(x < z)
   println(new Rational(2))
 }
 
@@ -19,15 +19,15 @@ class Rational(x: Int, y: Int) {
   private val g = gcd(x, y)
   def numer = x / g
   def denom = y / g
-  def add(that: Rational) = 
+  def + (that: Rational) = 
     new Rational(
         numer * that.denom + that.numer * denom,
         denom * that.denom
     )
-  def neg = new Rational(-numer, denom)
-  def sub(that: Rational) = add(that.neg)
-  def less(that: Rational) =  ((numer / denom) < (that.numer /that.denom))
-  def max(that: Rational) = if (this.less(that)) that else this
+  def unary_- = new Rational(-numer, denom)
+  def - (that: Rational) = this + -that
+  def < (that: Rational) =  ((numer / denom) < (that.numer /that.denom))
+  def max(that: Rational) = if (this < that) that else this
   
   override def toString = numer + "/" + denom
 }
